@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div style="display: flex; flex-direction: column; align-items: center;">
+    <form method="GET">
+        <input type="text" name="q" value="{{ query }}" placeholder="Buscar en Google" style="margin-top: auto; border-radius: 7px; border-style:groove; width: 270px; height: 25px;">
+        <button type="submit" style="background-color: aquamarine; border-radius: 7px; height: 30px; top: auto;">Buscar</button>
+    </form>
+    
+    {% if results %}
+        <ul>
+            {% for item in results %}
+                <li>
+                    <a href="{{ item.link }}">{{ item.title }}</a>
+                    <p>{{ item.snippet }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</div>
+</body>
+</html>
