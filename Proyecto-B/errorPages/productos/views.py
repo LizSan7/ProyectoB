@@ -4,7 +4,7 @@ from .models import Producto
 from django.http import JsonResponse
 
 # from .forms import productoForm
-
+#ya
 # Create your views here.
 
 
