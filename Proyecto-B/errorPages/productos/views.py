@@ -3,7 +3,7 @@ from .models import Producto
 #Este Objeto me permite enviar respuesta JSON
 from django.http import JsonResponse
 
-from .forms import productoForm
+# from .forms import productoForm
 
 # Create your views here.
 
