@@ -10,25 +10,28 @@
 <body>
     <h1>Lista de Productos usando JSON con promesas</h1>
     <div id="productos"></div>
-    <script>
-        //Las funciones asincronas de Fetch con then
+   <script>
+        //las funciones asincronas con Fetch con then
         function cargarProductos(){
-            //JS se va a intentar conecta con el endpoint
-            fetch('/productos/api/get/')
+            //JS se va a intentar conectar con el end-point
+            fetch('/productos/api/get')
             .then(response => response.json())
-            .then(data =>{
-                let productosDiv =document.getElementById('productos');
-                //Borrar el contenido
+            .then(data => {
+                let productosDiv = document.getElementById ('productos');
+                //Borrar el contenido 
                 productosDiv.innerHTML = "";
                 data.forEach(producto => {
                     productosDiv.innerHTML += 
-                    `<p><strong>${producto.nombre}</strong> -
-                        $ ${producto.precio} <br> 
-                        <img src="${producto.imagen}" alt="x" width="100"/>
-                        </p>`
+                    `<p><strong>${producto.nombre}</strong> 
+                    $ ${producto.precio} <br>
+                    <img src="${producto.imagen}" alt="X" width="100" />
+                    </p>`
                 })
+
             })
+            .catch(error => console.error('Error: ',error));
         }
+        cargarProductos()
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 
