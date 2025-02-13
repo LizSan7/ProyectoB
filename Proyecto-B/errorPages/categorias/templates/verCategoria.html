@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ver Categorias</title>
+</head>
+<body>
+    <h1>Lista de Categorias usando JSON con promesas</h1>
+    <div id="categorias" class="row"></div>
+   <script>
+        //las funciones asincronas con Fetch con then
+        function cargarCategorias(){
+            //JS se va a intentar conectar con el end-point
+            fetch('/categorias/api/get')
+            .then(response => response.json())
+            .then(data => {
+                let categoriasDiv = document.getElementById ('categorias');
+                //Borrar el contenido 
+                categoriasDiv.innerHTML = "";
+                data.forEach(categoria => {
+                    categoriasDiv.innerHTML += 
+                    `<div class="col-lg-4 col-md-6 col-sm-12 mb-3">
+                    <div class="card text-center shadow-sm">
+                        <img src="${categoria.imagen}" class="card-img-top img-fluid" style="height: 300px; object-fit: cover;" alt="${categoria.nombre}">
+                        <div class="card-body">
+                            <h5 class="card-title">${categoria.nombre}</h5>
+                        </div>
+                    </div>
+                </div>`
+                })
+
+            })
+            .catch(error => console.error('Error: ',error));
+        }
+        cargarCategorias()
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
