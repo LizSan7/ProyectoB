@@ -88,7 +88,14 @@ def actualizar_producto(request, id_producto):
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=400)
     return JsonResponse({'error': 'Método no es PUT'}, status=405)
+
 #Funciones para DELETE
+def borrar_producto(request, id_producto):
+    if request.method == 'DELETE':
+        producto = get_object_or_404(Producto, id= id_producto)
+        producto.delete() # <-- Borra físicamente el registro de la BD
+        return JsonResponse({'mensaje': 'Producto eliminado correctamente'}, status =200)
+    return JsonResponse({'error': 'El método no es DELETE'}, status=405)
 
 #Función adicional para GET
 #De retornar un producto especifico
