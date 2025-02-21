@@ -71,3 +71,24 @@ def registrar_producto(request):
     return JsonResponse (
         {'error': 'El método no es soportado'}, status = 405
     )
+
+from django.shortcuts import get_object_or_404
+#Funciones para el método PUT
+def actualizar_producto(request, id_producto):
+    if request.method == 'PUT':
+        producto = get_object_or_404(Producto, id= id_producto)
+        try:
+            #La información de la modificación del producto viene del body del request
+            data = json.loads(request.body)
+            producto.nombre = data.get('nombre', producto.nombre)
+            producto.precio = data.get('precio', producto.precio)
+            producto.imagen = data.get('imagen', producto.imagen)
+            producto.save()
+            return JsonResponse({'mensaje': 'Producto actualizado correctamente'}, status =200)
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=400)
+    return JsonResponse({'error': 'Método no es PUT'}, status=405)
+#Funciones para DELETE
+
+#Función adicional para GET
+#De retornar un producto especifico
