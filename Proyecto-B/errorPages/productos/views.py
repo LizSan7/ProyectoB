@@ -99,3 +99,15 @@ def borrar_producto(request, id_producto):
 
 #Función adicional para GET
 #De retornar un producto especifico
+
+def obtener_producto(request, id_producto):
+    if request.method == 'GET':
+        producto = get_object_or_404(Producto, id= id_producto)
+        data = {
+            "id": producto.id,
+            "nombre": producto.nombre,
+            "precio": producto.precio,
+            "imagen": producto.imagen
+        }
+        return JsonResponse(data, status=200)
+    return JsonResponse({'error': 'El método no es GET'}, status=405)
