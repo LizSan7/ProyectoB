@@ -6,5 +6,6 @@ router = SimpleRouter()
 router.register(r'api', AlumnoViewset)
 
 urlpatterns = [
-    path('', include(router.urls))
+    path('', include(router.urls)),
+    path('agregar/', agregar_alumno, name= 'agregar'),
 ]
